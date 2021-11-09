@@ -6,14 +6,59 @@
 //
 
 import SwiftUI
-
-let journalEntries = ["Today", "When", "Before", "After"]
+import CoreData
 
 struct JournalView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(fetchRequest: JournalEntry.newFetchRequest)
+
+    var entries: FetchedResults<JournalEntry>
+    
     var body: some View {
-        List {
+        NavigationView {
+            List {
+                ForEach(entries) { entry in
+                    HStack {
+                            VStack(alignment: .leading) {
+                                Text("\(entry.textEntry)")
+                                    .font(.headline)
+                                Text("\(entry.dateEntry) - Date")
+                                    .font(.subheadline)
+                            }
+                    }
+                    .frame(height: 50)
+                }
+
+                .onDelete { indexSet in
+                            for index in indexSet {
+                                viewContext.delete(entries[index])
+                            }
+                            do {
+                                try viewContext.save()
+                            } catch {
+                                print("Not deleted")
+                                print(error.localizedDescription)
+                            }
+                        }
+            }
+                .listStyle(PlainListStyle())
+                .navigationTitle("Journal")
+//                .navigationBarItems(trailing: Button(action: { JournalEntryView()
+//                }, label: {
+//                    Image(systemName: "plus.circle")
+//                        .imageScale(.large)
+//                }))
+
+        }
+    }
+
+
+            
+            
+            
 //            ForEach(journalEntries, id:\.self) { journalEntriesTitles in
-            Text("wwo")
 //                HStack {
 //                    Image(systemName: "calendar")
 //                        .resizable()
@@ -26,7 +71,7 @@ struct JournalView: View {
 //                        Text("Hello")
 //                            .font(.headline)
 //                    }
-//                    Spacer()
+//                   Spacer()
 //                    Button(action: {
 //                        print("Add Entry")
 //                    }) {
@@ -36,12 +81,14 @@ struct JournalView: View {
 //                }
 //            }
 //            .accentColor(.pink)
-        }
+       // }
+//        .navigationTitle("Journal Entries")
     }
-}
+
 
 struct JournalView_Previews: PreviewProvider {
     static var previews: some View {
-        JournalView()
+        JournalView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        
     }
 }

@@ -24,6 +24,7 @@ struct ContentView: View {
                 }
             }
             JournalView()
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .tag(1)
             .tabItem {
                 VStack {
@@ -32,6 +33,7 @@ struct ContentView: View {
                 }
             }
             JournalEntryView()
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .tag(2)
             .tabItem {
                 VStack {

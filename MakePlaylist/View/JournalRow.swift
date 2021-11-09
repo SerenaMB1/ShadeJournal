@@ -7,14 +7,10 @@
 
 import SwiftUI
 
-//var journal1: Journal(id: 1, title: "Today", text: "Today I went to.. ")
-
 struct JournalRow: View {
-    var journal1 = Journal(id: 1, title: "Today", text: "Today I went to.. ")
     var body: some View {
         HStack {
             Text("Hello World")
-
             Spacer()
         }
     }
