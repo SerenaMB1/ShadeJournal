@@ -17,10 +17,11 @@ struct PersistenceController {
         
         let controller = PersistenceController(inMemory: true)
         
-        for _ in 0..<10 {
+        for _ in 0..<5 {
             let newItem = JournalEntry(context: controller.container.viewContext)
                 newItem.textEntry = "Today I went to the beach"
                 newItem.dateEntry = Date.now
+
         }
 
         return controller
@@ -47,5 +48,14 @@ struct PersistenceController {
                 // Show some error here
             }
         }
+    }
+    
+    func newEntry() -> JournalEntry {
+        
+        let entry = JournalEntry(context: container.viewContext)
+        entry.textEntry = "I AM A POTATO"
+        entry.dateEntry = Date.now
+        
+        return entry
     }
 }

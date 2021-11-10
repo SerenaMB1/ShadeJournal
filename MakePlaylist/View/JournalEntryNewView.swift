@@ -1,38 +1,35 @@
 //
-//  JournalEntryView.swift
+//  JournalEntryNewView.swift
 //  MakePlaylist
 //
-//  Created by Serena Badesha on 07/11/2021.
+//  Created by Serena Badesha on 10/11/2021.
 //
 
 import SwiftUI
 import CoreData
 
-struct JournalEntryView: View {
+struct JournalEntryNewView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
     @Environment (\.presentationMode) var presentationMode
     
     @State var id: UUID = UUID()
-    @State var textEntry: String = ""
-    @State var dateEntry: Date = Date.now
+    @State var textEntryView: String = ""
+    @State var dateEntryView: Date = Date.now
     
     var body: some View {
         
         VStack(alignment: .leading) {
             
-            DatePicker(selection: $dateEntry, label: { Text("Date ") })
-            TextField("Today I went..", text: $textEntry)
-           
+            DatePicker(selection: $dateEntryView, label: { Text("Date ") })
+            TextField("What did you do?.", text: $textEntryView)
             Button(action: {
-               
-                guard self.textEntry != "" else {return}
+                guard self.textEntryView != "" else {return}
                 
-                let newEntry = JournalEntry(context: viewContext)
-                
-                newEntry.textEntry = self.textEntry
-                newEntry.dateEntry = self.dateEntry
+                let entry = JournalEntry(context: viewContext)
+                entry.textEntry = textEntryView
+                entry.dateEntry = dateEntryView
                 
                 do {
                     try viewContext.save()
@@ -48,12 +45,14 @@ struct JournalEntryView: View {
                 Text("Save entry")
             }
         }
-        
+        .onAppear(perform: { dateEntryView = Date.now
+            textEntryView = ""})
     }
 }
 
-struct JournalEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        JournalEntryView()
-    }
-}
+
+//struct JournalEntryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        JournalEntryView()
+//    }
+//}

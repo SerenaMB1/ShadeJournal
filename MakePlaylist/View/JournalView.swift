@@ -21,12 +21,13 @@ struct JournalView: View {
             List {
                 ForEach(entries) { entry in
                     HStack {
-                            VStack(alignment: .leading) {
-                                Text("\(entry.textEntry)")
+                          VStack(alignment: .leading) {
+                              NavigationLink( "\(entry.textEntry) ", destination: JournalEntryEditView(entry: entry))
                                     .font(.headline)
-                                Text("\(entry.dateEntry) - Date")
-                                    .font(.subheadline)
+                                Text("\(entry.dateEntry) - Date" )
+                                  .font(.subheadline)
                             }
+                    
                     }
                     .frame(height: 50)
                 }

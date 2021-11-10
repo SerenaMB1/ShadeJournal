@@ -32,7 +32,7 @@ struct ContentView: View {
                     Text("Journal")
                 }
             }
-            JournalEntryView()
+            JournalEntryNewView()
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .tag(2)
             .tabItem {
@@ -40,6 +40,7 @@ struct ContentView: View {
                     Image(systemName: "square.and.pencil")
                     Text("Journal Entry")
                 }
+               // .onAppear(perform: loadStateVariables)
             }
         }
         .accentColor(.pink )

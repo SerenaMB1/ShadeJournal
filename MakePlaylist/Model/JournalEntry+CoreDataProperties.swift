@@ -16,6 +16,7 @@ extension JournalEntry {
     }
     @NSManaged public var textEntry: String
     @NSManaged public var dateEntry: Date
+
 }
 
 extension JournalEntry: Identifiable {
