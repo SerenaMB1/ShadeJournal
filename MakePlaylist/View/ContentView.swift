@@ -38,9 +38,8 @@ struct ContentView: View {
             .tabItem {
                 VStack {
                     Image(systemName: "square.and.pencil")
-                    Text("Journal Entry")
+                    Text("New Journal Entry")
                 }
-               // .onAppear(perform: loadStateVariables)
             }
         }
         .accentColor(.pink )
