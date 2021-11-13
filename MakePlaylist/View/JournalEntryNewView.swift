@@ -23,7 +23,7 @@ struct JournalEntryNewView: View {
             
             VStack(alignment: .leading) {
                 
-                DatePicker(selection: $dateEntryView, label: { Text("Date ") })
+                DatePicker(selection: $dateEntryView, label: {})
                     .padding(.leading, 5)
                     .padding(.bottom, 30)
                 
@@ -35,9 +35,6 @@ struct JournalEntryNewView: View {
                     .keyboardType(.alphabet)
                     .frame(width: 365, height: 350)
                     .padding([.leading], 5)
-                    
-                
-                   // .frame(maxWidth: .infinity, maxHeight: .infinity ,alignment: .center)
                  
                 Button(action: {
                     guard self.textEntryView != "" else {return}
@@ -78,7 +75,6 @@ struct JournalEntryNewView: View {
             }
             .keyboardType(.alphabet)
             .navigationTitle("New Entry")
-            .font("Impact")
         }
         .onAppear(perform: { dateEntryView = Date.now
             textEntryView = ""})
